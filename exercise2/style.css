@@ -1,0 +1,15 @@
+.window {
+  display: flex;
+  gap: 20px;
+  margin: auto;
+  justify-content: center;
+}
+.button {
+  display: flex;
+  gap: 50px;
+  margin-top: 30px;
+  justify-content: center;
+}
+.container {
+  width: 600px;
+}
