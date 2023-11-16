@@ -1,25 +1,27 @@
-const input1 = document.getElementById("window1");
-const input2 = document.getElementById("window2");
-const input3 = document.getElementById("window3");
+const refresh = () => {
+  const random1Input = document.getElementById("random1");
+  const random2Input = document.getElementById("random2");
 
-input3 = input1 + input2;
+  random1Input.value = Math.floor(Math.random() * 100) + 1;
+  random2Input.value = Math.floor(Math.random() * 100) + 1;
 
-function btn1() {
-  input3;
-}
+  document.getElementById("sum").value = "";
+};
 
-function window1() {
-  console.log(input1.value);
-}
-function window2() {
-  console.log(input2.value);
-}
-function window3() {
-  console.log(input3.value);
-}
+const isEqual = () => {
+  const random1Input = document.getElementById("random1");
+  const random2Input = document.getElementById("random2");
 
-const btn1 = document.getElementById("btn1");
-btn1.addEventListener("click", window1);
+  const sumInput = document.getElementById("sum");
 
-const btn2 = document.getElementById("btn2");
-btn2.addEventListener("click", window1);
+  let sumOfTwoRandNum = Number(random1Input.value) + Number(random2Input.value);
+  let inputNum = Number(sumInput.value);
+
+  if (sumOfTwoRandNum === inputNum) alert("It is true");
+  else alert("It is false");
+};
+
+const checkButton = document.getElementById("checkBtn");
+checkButton.addEventListener("click", isEqual);
+const refreshbtn = document.getElementById("refreshBtn");
+refreshbtn.addEventListener("click", refresh);
