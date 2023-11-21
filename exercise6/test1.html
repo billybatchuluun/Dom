@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2x2 Picture Puzzle</title>
+    <style>
+      #puzzle-container {
+        display: grid;
+        grid-template-columns: repeat(2, 150px);
+        grid-template-rows: repeat(2, 150px);
+        gap: 10px;
+      }
+
+      .puzzle-piece
+        width: 150px;
+        height: 150px;
+        border: 1px solid #000;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="puzzle-container">
+      <img
+        src="image1.jpg"
+        alt="Piece 1"
+        class="puzzle-piece"
+        draggable="true"
+        ondragstart="drag(event)"
+      />
+      <img
+        src="image2.jpg"
+        alt="Piece 2"
+        class="puzzle-piece"
+        draggable="true"
+        ondragstart="drag(event)"
+      />
+      <img
+        src="image3.jpg"
+        alt="Piece 3"
+        class="puzzle-piece"
+        draggable="true"
+        ondragstart="drag(event)"
+      />
+      <img
+        src="image4.jpg"
+        alt="Piece 4"
+        class="puzzle-piece"
+        draggable="true"
+        ondragstart="drag(event)"
+      />
+    </div>
+
+    <script>
+      function allowDrop(event) {
+        event.preventDefault();
+      }
+
+      function drag(event) {
+        event.dataTransfer.setData("text", event.target.src);
+      }
+
+      function drop(event) {
+        event.preventDefault();
+        var data = event.dataTransfer.getData("text");
+        var draggedImage = new Image();
+        draggedImage.src = data;
+        draggedImage.className = "puzzle-piece";
+        draggedImage.draggable = true;
+        draggedImage.ondragstart = drag;
+
+        // Check if the drop is happening on a valid dropzone (a puzzle piece)
+        if (event.target.classList.contains("puzzle-piece")) {
+          // Swap the images of the dragged and dropped elements
+          var droppedImage = event.target;
+          var parent = droppedImage.parentNode;
+
+          parent.replaceChild(draggedImage, droppedImage);
+          parent.insertBefore(droppedImage, draggedImage);
+        }
+      }
+    </script>
+  </body>
+</html>
+~
