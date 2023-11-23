@@ -1,0 +1,80 @@
+!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      #draggableElement {
+        width: 100px;
+        height: 100px;
+        background-color: #3498db;
+        color: #ffffff;
+        text-align: center;
+        line-height: 100px;
+        cursor: move;
+      }
+
+      #dropZone {
+        width: 300px;
+        height: 300px;
+        border: 2px dashed #2ecc71;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="draggableElement" draggable="true">Drag me!</div>
+
+    <div id="dropZone">Drop here!</div>
+
+    <script>
+      // Get the draggable element
+      var draggableElement = document.getElementById("draggableElement");
+
+      // Add event listeners for the draggable element
+      draggableElement.addEventListener("dragstart", handleDragStart);
+
+      // Get the drop zone element
+      var dropZone = document.getElementById("dropZone");
+
+      // Add event listeners for the drop zone element
+      dropZone.addEventListener("dragenter", handleDragEnter);
+      dropZone.addEventListener("dragover", handleDragOver);
+      dropZone.addEventListener("dragleave", handleDragLeave);
+      dropZone.addEventListener("drop", handleDrop);
+
+      // Drag start event handler
+      function handleDragStart(event) {
+        event.dataTransfer.setData("text/plain", "Hello, world!"); // You can set data to be transferred
+      }
+
+      // Drag enter event handler
+      function handleDragEnter(event) {
+        event.preventDefault();
+        dropZone.style.backgroundColor = "#2ecc71";
+      }
+
+      // Drag over event handler
+      function handleDragOver(event) {
+        event.preventDefault();
+      }
+
+      // Drag leave event handler
+      function handleDragLeave(event) {
+        dropZone.style.backgroundColor = "";
+      }
+
+      // Drop event handler
+      function handleDrop(event) {
+        event.preventDefault();
+        dropZone.style.backgroundColor = "";
+
+        // Access the data transferred during the dragstart event
+        var data = event.dataTransfer.getData("text/plain");
+
+        // You can do something with the transferred data
+        alert("Data received: " + data);
+      }
+    </script>
+  </body>
+</html>
